@@ -1,0 +1,50 @@
+Q. 
+  
+   입력받은 길로 이동했을 때, 도착하는 좌표를 출력하는 문제이다.
+  
+   입력 조건
+    1. 첫째 줄에 공간의 크기를 나타내는 N이 주어진다 (1 <= N <= 100)
+    2. 둘째 줄에 옇애가 A가 이동할 계획서 내용이 주어진다. (1 <= 이동 횟수 <= 100)
+   
+   출력 조건
+    1. 첫째 줄에 여행가 A가 최종적으로 도착할 지점의 좌표 (X, Y)를 공백으로 구분하여 출력한다.
+    
+   입력)
+   
+   5
+   R R R U D D
+   
+   출력)
+   
+   3 4
+   
+[풀이]
+ 
+ 계획(ways)에 따라서 x, y값을 변경해준다.
+ 0보다 작거나 N을 넘어간다면 블럭 밖으로 나가는거니 PASS해준다.
+
+[My Code + Book Code]
+
+N = int(input()) # 몇개 들어갈지 입력받기
+
+ways = list(map(str, input().split())) # 갈 방향 입력받기
+move = ['L', 'R', 'U', 'D']
+
+dx = [0, 0, -1, 1] # 좌우로 이동하기 위해서는 y값이 변해야한다.
+dy = [-1, 1, 0, 0] # 상하로 이동하기 위해서는 x값이 변해얗나다.
+
+x, y = 1, 1 # 기본 위치
+
+for way in ways: # 입력받은 way를 하나씩 빼내온다.
+    for i in range(len(move)):
+        if way == move[i]:
+            nx = x + dx[i] # next x를 넣어준다.
+            ny = y + dy[i] # next y를 넣어준다.
+
+    if nx < 1 or nx > N or ny < 1 or ny > N: # block 밖으로 나간다면
+        continue # 다시 코드로 돌아간다.
+
+    x = nx # x에 next x를 넣어준다.
+    y = ny # y에 next y를 넣어준다.
+
+print(x, y)
