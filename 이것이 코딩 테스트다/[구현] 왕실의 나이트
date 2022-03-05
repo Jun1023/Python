@@ -76,3 +76,7 @@ for step in steps:
         result += 1
 
 print(result)
+
+
+* 시간 제한 20분
+* 실제 소요 시간 19분 48
