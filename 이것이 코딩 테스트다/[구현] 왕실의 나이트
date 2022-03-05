@@ -1,0 +1,78 @@
+Q. 
+  
+   이동했을 때 지정된 범위를 벗어나는지 체크하고, 갈 수 있는 모든 경우의 수의 갯수를 출력해주는 문제이다.
+  
+   입력 조건
+    1. 첫째 줄에 8 X 8 좌표 평면상에서 현재 나이트가 위치한 곳의 좌표를 나타내는 두 문자로 구성된 문자열이 입력된다. 입력 문자는 a1처럼 열과 행으로 이뤄진다.
+   
+   출력 조건
+    1. 첫째 줄에 나이트가 이동할 수 있는 경우의 수를 출력하시오.
+    
+   입력)
+   
+   a1
+   
+   출력)
+   
+   2
+   
+   
+   
+[풀이]
+ 
+ 입력된 위치에서 갈 수 있는 모든 경우의 수를 계산한다.
+ 이동한 위치가 체스판을 벗어난다면 pass해주고, 체스판 안에 있다면 cnt += 1을 해준다.
+
+
+
+[My Code]
+
+knight = input()
+x, y = knight[0], int(knight[1])
+
+index_x = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+
+go_way = [[2, 1], [2, -1], [1, 2], [1, -2], [-2, 1], [-2, -1], [-1, 2], [-1, -2]] # 갈 수 있는 길의 모든 경우
+
+cnt = 0 # 경우의 수 count
+
+for i in index_x: # a ~ h값을 1 ~ 8로 변환해주는 부분
+    if x == str(i):
+        x = int(index_x.index(i)) + 1
+        break
+    else:
+        pass
+
+for gw in go_way:
+    nx = x + gw[0] # 행 계산
+    ny = y + gw[1] # 열 계산
+
+    if nx < 1 or nx > 8 or ny < 1 or ny > 8: # 더한 값이 체스판 위를 벗어난다면
+        pass
+    else: # 벗어나지 않는다면
+        cnt += 1
+
+print(cnt)
+
+
+
+[Book Code]
+
+input_data = input() # 현재 나이트 위치 입력받기
+row = int(input_data[1])
+column = int(ord(input_data[0])) - int(ord('a')) + 1
+
+# 나이트가 이동할 수 있는 8가지 방향 정의
+steps = [(-2, -1), (-1, -2), (1, -2), (2, -1), (2, 1), (1, 2), (-1, 2), (-2, 1)]
+
+# 7가지 방향에 대해 각 위치로 이동이 가능한지 확인
+result = 0
+for step in steps:
+    # 이동하고자 하는 위치 확인
+    next_row = row + step[0]
+    next_column = column + step[1]
+    # 해당 위치로 이동이 가능하다면 카운트 증가
+    if next_row >= 1 and next_row <= 8 and next_column >= 1 and next_column <= 8:
+        result += 1
+
+print(result)
