@@ -114,3 +114,71 @@ print(count)
 
 * 어떻게 풀지 이해까지는 했으나 구현하지 못했다.
 * 책을 클론코딩하며 구현을 어떻게 해야할지 이해했으며 다음날 다시 풀어 본다.
+
+
+
++ 클론코딩/손코딩으로 이해하며 책을 보지 않고 다시 코딩했다.
+
+방향 전환과 이차원 배열 사용하는 법을 공부하기 좋은 문제였던 것 같다.
+
+
+n, m = map(int, input().split()) # Map의 크기 n x m 생성
+
+d = [[0] * m for _ in range(n)] # 이동 한적 있는지 배열 생성
+
+x, y, direction = map(int, input().split())
+
+d[x][y] = 1 # 현재 위치를 이동 위치 배열에 1로 바꿈
+
+array = []
+for i in range(n):
+    array.append(list(map(int, input().split()))) # 각 위치의 육지/바다 설정
+
+dx = [-1, 0, 1, 0]
+dy = [0, 1, 0, -1]
+
+
+# 방향 전환
+
+def turn_left(): # 왼쪽으로 방향 전환
+    global direction
+    direction -= 1
+    if direction == -1:
+        direction = 3
+
+count = 1 # 이동한 횟수
+turn_time = 0
+
+while True:
+    turn_left()
+
+    nx = x + dx[direction]
+    ny = y + dy[direction]
+
+    if d[nx][ny] == 0 and array[nx][ny] == 0:
+        d[nx][ny] = 1
+        x = nx
+        y = ny
+        count += 1
+        turn_time = 0
+        continue
+
+    else:
+        turn_time += 1
+
+    if turn_time == 4:
+        nx = x - dx[direction]
+        ny = y - dy[direction]
+
+        if array[nx][ny] == 0:
+            x = nx
+            y = ny
+
+        else:
+            break
+        turn_time = 0
+
+print(count)
+
+
+* 책과 똑같게 코딩했지만, 비슷한 문제가 나오면 응용할 수 있을 것 같다.
