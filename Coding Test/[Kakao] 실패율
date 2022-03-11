@@ -104,11 +104,6 @@ def solution(N, stages):
     return answer
 
 
-N = int(input())
-stages = list(map(int, input().split()))
-
-print(solution(N, stages))
-
 * 내가 리스트로 코드를 짰을 때, 성공하긴 했지만, 많은 케이스가 시간 초과가 났다. 
 
 
