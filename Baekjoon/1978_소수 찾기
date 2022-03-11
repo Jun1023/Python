@@ -1,0 +1,38 @@
+Q.
+
+- 문제
+주어진 수 N개 중에서 소수가 몇 개인지 찾아서 출력하는 프로그램을 작성하시오.
+
+- 입력
+첫 줄에 수의 개수 N이 주어진다. N은 100이하이다. 다음으로 N개의 수가 주어지는데 수는 1,000 이하의 자연수이다.
+
+- 출력
+주어진 수들 중 소수의 개수를 출력한다.
+
+
+
+A.
+
+def prime_num(n): # 소수를 찾는 함수
+    for i in range(2, n):
+        if n % i == 0: # 딱 떨어지는 수가 있다면 소수가 아님
+            return False
+    return True # False값이 나오지 않는다면 소수이므로 True
+
+result = 0
+
+n = int(input())
+n_list = list(map(int, input().split()))
+
+for num in n_list:
+    if num == 1: # 1은 소수가 아님
+        continue
+    elif prime_num(num): # num이 소수라면
+        result += 1
+    else: # num이 소수가 아니라면
+        continue
+
+print(result)
+
+
+* 소수를 찾는 함수를 만들어서, 소수라면 result를 1 증가시키고, 소수가 아니라면 넘어가게 만들어서 해결했다.
