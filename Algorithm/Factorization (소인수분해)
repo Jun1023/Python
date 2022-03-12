@@ -1,4 +1,4 @@
-def factorization(n): # 소인수 분해 공식
+def factorization(n): # 소인수 분해 함수
     x = 2
 
     if n == 1: # 입력받은 수가 1이라면
