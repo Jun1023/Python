@@ -1,5 +1,19 @@
+[Code_1]
+
 def prime_num(n): # 소수를 찾는 함수
     for i in range(2, n):
         if n % i == 0: # 딱 떨어지는 수가 있다면 소수가 아님
             return False
     return True # False값이 나오지 않는다면 소수이므로 True
+
+
+[Code_2]
+
+def IsPrime(n):
+    if n == 1:
+        return False
+    else:
+        for i in range(2, int(n ** 0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
