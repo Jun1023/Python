@@ -1,0 +1,56 @@
+Q.
+
+- 문제
+M이상 N이하의 소수를 모두 출력하는 프로그램을 작성하시오.
+
+- 입력
+첫째 줄에 자연수 M과 N이 빈 칸을 사이에 두고 주어진다. (1 ≤ M ≤ N ≤ 1,000,000) M이상 N이하의 소수가 하나 이상 있는 입력만 주어진다.
+
+- 출력
+한 줄에 하나씩, 증가하는 순서대로 소수를 출력한다.
+
+
+
+A.
+
+[My Code 1]
+
+from sys import stdin
+
+def prime_num(n):  # 소수를 찾는 함수
+    for i in range(2, n):
+        if n % i == 0:  # 딱 떨어지는 수가 있다면 소수가 아님
+            return False
+    return True  # False값이 나오지 않는다면 소수이므로 True
+
+
+M, N = map(int, stdin.readline().split())
+
+for i in range(M, N + 1):
+    if i == 1:
+        continue
+    elif prime_num(i):
+        print(i)
+
+
+[My Code 2]
+
+from sys import stdin
+
+def prime_num(n):  # 소수를 찾는 함수
+    if n == 1:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:  # 딱 떨어지는 수가 있다면 소수가 아님
+            return False
+    return True  # False값이 나오지 않는다면 소수이므로 True
+
+M, N = map(int, stdin.readline().split())
+
+for j in range(M, N + 1):
+    if prime_num(j):
+        print(j)
+        
+
+* 범위를 지정해주고 하나씩 출력하게 만들었는데 시간 초과가 나왔다.
+* 소수를 찾는 범위를 (n ** 0.5) + 1, 루트 n으로 바꿔줌으로써 시간 문제를 해결할 수 있었다.
