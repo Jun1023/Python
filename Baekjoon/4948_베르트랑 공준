@@ -1,0 +1,84 @@
+Q.
+
+- 문제
+베르트랑 공준은 임의의 자연수 n에 대하여, n보다 크고, 2n보다 작거나 같은 소수는 적어도 하나 존재한다는 내용을 담고 있다.
+
+이 명제는 조제프 베르트랑이 1845년에 추측했고, 파프누티 체비쇼프가 1850년에 증명했다.
+
+예를 들어, 10보다 크고, 20보다 작거나 같은 소수는 4개가 있다. (11, 13, 17, 19) 또, 14보다 크고, 28보다 작거나 같은 소수는 3개가 있다. (17,19, 23)
+
+자연수 n이 주어졌을 때, n보다 크고, 2n보다 작거나 같은 소수의 개수를 구하는 프로그램을 작성하시오. 
+
+- 입력
+입력은 여러 개의 테스트 케이스로 이루어져 있다. 각 케이스는 n을 포함하는 한 줄로 이루어져 있다.
+
+입력의 마지막에는 0이 주어진다.
+
+- 출력
+각 테스트 케이스에 대해서, n보다 크고, 2n보다 작거나 같은 소수의 개수를 출력한다.
+
+
+
+A.
+
+[My Code 1]
+
+from sys import stdin
+
+def prime_num(n):  # 소수를 찾는 함수
+    if n == 1:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:  # 딱 떨어지는 수가 있다면 소수가 아님
+            return False
+    return True  # False값이 나오지 않는다면 소수이므로 True
+
+while True:
+    result = []
+    num = int(stdin.readline())
+    if num == 0:
+        break
+    else:
+        for i in range(num+1, (num * 2)+1):
+            if prime_num(i):
+                result.append(i)
+        print(len(result))
+
+* 범위를 입력받고 그 범위에 소수를 찾는 방식을 사용했는데 '시간 초과'가 발생했다.
+
+[My Code 2]
+
+import sys
+from sys import stdin
+
+def prime_num(n):  # 소수를 찾는 함수
+    if n == 1:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:  # 딱 떨어지는 수가 있다면 소수가 아님
+            return False
+    return True  # False값이 나오지 않는다면 소수이므로 True
+
+all_num_list = list(range(2, 246912)) # 문제 범위
+prime_num_list = []
+
+for i in all_num_list:
+    if prime_num(i):
+        prime_num_list.append(i)
+
+while True:
+    cnt = 0
+    num = int(stdin.readline())
+    if num == 0:
+        break
+    else:
+        for i in prime_num_list:
+            if num < i <= (num * 2):
+                cnt += 1
+        print(cnt)
+        
+
+* 문제 범위의 소수를 모두 찾아 리스트에 넣어주고, 그 리스트에서 찾고자 하는 범위를 주어 그 범위 안의 소수의 갯수를 체크해주었다.
+* 이 방법이 My Code 1보다 짧게 나올줄 몰랐는데 이중 for문을 사용해서 시간 복잡도가 많이 나온 것 같다.
+My Code 1 = O(n^2)
+My COde 2 = O(n)
