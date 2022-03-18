@@ -1,0 +1,28 @@
+[My Code 1] for 반복문 사용
+import sys
+
+def fibonacci(n):
+    a, b = 0, 1
+
+    for i in range(n):
+        a, b = b, a + b
+        
+    return a
+
+
+* 많이 큰 수를 사용하지 않는다면 반복문을 사용해서 계산하는게 빠르다.
+
+* 범위가 100만을 넘어간다면 아래와 같은 방법이 더 빠르다.
+
+[My code 2]
+import decimal
+
+def formulaFibWithDecimal(n):
+    decimal.getcontext().prec = 10000
+
+    root_5 = decimal.Decimal(5).sqrt()
+    phi = ((1+root_5)/2)
+
+    a = ((phi**n) - ((-phi)**-n))/root_5
+
+    return round(a)
