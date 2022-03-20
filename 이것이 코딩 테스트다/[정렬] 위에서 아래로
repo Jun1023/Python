@@ -1,0 +1,43 @@
+Q. 
+  
+  숫자를 입력받고 내림차순으로 정렬해 출력하면 되는 문제이다.
+
+  [Input Condition]
+  1. 첫째 줄에 수열에 속해 있는 수의 개수 N이 주어진다. (1 <= N <= 500)
+  2. 둘째 줄부터 N + 1번째 줄까지 N개의 수가 입력된다. 수의 범위는 1 이상 100,000 이하의 자연수이다.
+
+  [Output Condition]
+  1. 입력으로 주어진 수열이 내림차순으로 정렬된 결과를 공백으로 구분하여 출력한다. 동일한 수의 순서는 자유롭게 출력해도 괜찮다.
+    
+  [Input]
+  3
+  15
+  27
+  12
+
+  [Output]
+  27 15 12
+   
+  [풀이]
+
+  수를 입력받아 list로 넣어준다.
+  list의 값을 내림차순으로 정렬한다.
+  정렬된 값을 출력해준다.
+
+  [My Code]
+  
+  from sys import stdin
+
+  N = int(stdin.readline())
+
+  array = []
+  for i in range(N):
+    array.append(int(input()))
+
+  array = sorted(array, reverse=True)
+
+  for n in array:
+    print(n, end=' ')
+    
+    
+* sorted()를 사용해 쉽게 해결할 수 있
