@@ -1,0 +1,39 @@
+Q. 
+  
+  배열 A를 오름차순, B를 내림차순으로 정렬하여 가장 작은 값과 큰 값을 비교하여 교체하여 주면되는 문제이다.
+
+  [Input Condition]
+  1. 첫 번째 줄에 N, K가 공백으로 구분되어 입력된다. (1 <= N <= 100,000, 0 <= K <= N)
+  2. 두 번째 줄에 배열 A의 원소들이 공백으로 구분되어 입력된다. 모든 원소는 10,000,000보다 작은 자연수이다.
+  3. 세 번째 줄에 배열 B의 원소들이 공백으로 구분되어 입력된다. 모든 원소는 10,000,000보다 작은 자연수입니다.
+
+  [Output Condition]
+  1. 최대 K번의 바꿔치기 연산을 수행하여 만들 수 있는 배열 A의 모든 원소의 합의 최댓값을 출력한다.
+    
+  [Input]
+  5 3
+  1 2 5 4 3
+  5 5 6 6 5
+
+  [Output]
+  26
+   
+  [Code]
+
+  from sys import stdin
+
+  N, K = map(int, stdin.readline().split())
+
+  A = sorted(list(map(int, stdin.readline().split())))
+  B = sorted(list(map(int, stdin.readline().split())), reverse=True)
+
+  for i in range(K):
+      if A[i] < B[i]:
+          A[i], B[i] = B[i], A[i]
+      else:
+          break
+
+  print(sum(A))
+    
+    
+* sorted()의 revers=True를 잘 사용해주면 해결할 수 있었다.
