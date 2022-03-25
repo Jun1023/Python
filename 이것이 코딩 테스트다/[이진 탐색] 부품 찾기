@@ -1,0 +1,80 @@
+Q. 
+  
+  손님이 요청한 부품이 스토어에 있으면 'yes', 없으면 'no'를 출력해주면 되는 문제이다.
+
+  [Input Condition]
+  1. 첫째 정수 N이 주어진다. (1 <= N <= 1,000,000)
+  2. 둘째 줄에는 공백으로 구분하여 N개의 정수가 주어진다. 이때 정수는 1보다 크고 1,000,000 이하이다.
+  3. 셋째 줄에는 정수 M이 주어진다. (1 <= M <= 100,000)
+  4. 넷째 줄에는 공백으로 구분하여 M개의 정수가 주어진다. 이때 정수는 1보다 크고 1,000,000 이하이다.
+
+  [Output Condition]
+  1. 첫째 줄에 공백으로 구분하여 각 부품이 존재하면 yes를, 없으면 no를 출력한다.
+    
+  [Input]
+  5
+  8 3 7 9 2
+  3
+  5 7 9
+
+  [Output]
+  no yes yes
+   
+  [Code]
+
+  from sys import stdin
+
+  # 재귀 함수로 문제
+
+  def binary_search(array, target, start, end):
+      mid = (start + end) // 2
+
+      if start >= end:
+          return -1
+      if array[mid] == target:
+          return target
+      elif array[mid] < target:
+          return binary_search(array, target, mid + 1, end)
+      else:
+          return binary_search(array, target, start, mid - 1)
+
+
+  store_num = int(stdin.readline())
+  store_list = sorted(list(map(int, stdin.readline().split())))
+  user_num = int(stdin.readline())
+  user_list = sorted(list(map(int, stdin.readline().split())))
+
+  for item in user_list:
+      if binary_search(store_list, item, 0, len(store_list)):
+          print("yes", end=' ')
+      else:
+          print('no', end=' ')
+
+
+  # 반복문으로 문제 해결
+
+
+  store_num = int(stdin.readline())
+  store_list = sorted(list(map(int, stdin.readline().split())))
+  user_num = int(stdin.readline())
+  user_list = sorted(list(map(int, stdin.readline().split())))
+
+  for item in user_list:
+      start = 0
+      end = len(store_list)
+
+      while True:
+          mid = (start + end) // 2
+          if start >= end:
+              print('false')
+              break
+          if store_list[mid] == item:
+              print('True')
+              break
+          elif store_list[mid] < item:
+              start = mid + 1
+          else:
+              end = mid - 1
+
+   
+* 재귀 함수와 반복문으로 해결할 수 있어서 둘다 구현했다.
