@@ -1,0 +1,11 @@
+def binary_search(array, target, start, end):
+     mid = (start + end) // 2
+
+     if start >= end: # 종료 조건
+         return -1
+     if array[mid] == target: # target 찾으면 반환
+         return target
+     elif array[mid] < target: # mid가 target보다 작다면
+         return binary_search(array, target, mid + 1, end) # start를 mid + 1로 변경한 후 재귀
+     else: # array[mid] > target  mid가 target보다 크다면
+         return binary_search(array, target, start, mid - 1) # end를 mid - 1로 변경한 후 재귀
