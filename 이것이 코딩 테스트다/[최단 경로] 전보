@@ -1,0 +1,58 @@
+Q. 
+  
+  힙을 사용한 다익스트라 알고리즘을 변형해서 사용하면 풀 수 있는 문제이다.
+
+  [Input Condition]
+  1. 첫째 줄에 도시의 개수 n, 통로의 개수 m, 메시지를 보내고자 하는 도시 c가 주어진다. ( 1 <= n <= 30,000, 1 <= m <= 200,000, 1 <= c <= n)
+  2. 둘째 줄부터 m + 1번째 줄에 걸쳐 통로에 대한 정보 x, y, z가 주어진다. 이는 특정 도시 X에서 다른 특정 도시 y로 이어지는 통로가 있으며, 메시지가 전달되는 
+      시간이 z라는 의미이다. ( 1 <= x, y <= n, 1 <= z <= 1,000 )
+  
+  [Output Condition]
+  1. 첫째 줄에 도시 c에서 보낸 메시지를 받는 도시의 총 개수와 총 걸리는 시간을 공백으로 구분하여 출력한다.
+    
+  [Input]
+  3 2 1
+
+  [Output]
+  2 4
+   
+  [Code]
+
+  import heapq
+  import sys
+  input = sys.stdin.readline
+  INF = int(1e9)
+
+  n, m, c = map(int, input().split()) # n : 도시의 개수, m : 통로의 개수, c : 시작 도시 주소
+  graph = [[] for i in range(n + 1)]
+
+  distance = [INF] * (n + 1) # 최단 거리 테이블
+
+  for _ in range(m):
+      x, y, z = map(int, input().split())
+      graph[x].append((y, z))
+
+  def dijkstra(start):
+      q = []
+      heapq.heappush(q, (0, start))
+      distance[start] = 0 # 시작 노드로 가기 위한 최단 경로는 0으로 설정해야 한다.
+      while q: # 큐가 비어있지 않다면
+          dist, now = heapq.heappop(q) # 가장 최단 거리가 짧은 노드에 대한 정보 꺼내기
+          if distance[now] < dist: # 현재 노드가 이미 처리된 노드라면
+              continue
+          for i in graph[now]: # 현재 노드와 인접한 노드 확인
+              cost = dist + i[1]
+              if cost < distance[i[0]]:
+                  distance[i[0]] = cost
+                  heapq.heappush(q, (cost, i[0]))
+
+  dijkstra(c)
+
+  cnt = 0 # 도달할 수 있는 노드의 개수
+  max_distance = 0 # 도달할 수 있는 노드 중, 가장 멀리 있는 노드의 최단 거리
+  for d in distance:
+      if d != INF: # 도달 가능하다면
+          cnt += 1
+          max_distance = max(max_distance, d)
+
+  print(cnt - 1, max_distance) # 시작 노드는 제외해야 하므로 cnt - 1 출력
