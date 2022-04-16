@@ -1,0 +1,47 @@
+Q. 
+  
+  그리디 문제이다.
+
+  [Input Condition]
+  1. 첫째 줄에 모험가의 수 N이 주어집니다. ( 1 <= N <= 100,000 )
+  2. 둘째 줄에 각 모험가의 공포도의 값을 N 이하의 자연수로 주어지며, 각 자연수는 공백으로 구분합니다.
+  
+  [Output Condition]
+  1. 여행을 떠날 수 있는 구룹 수의 최댓값을 출력합나다.
+    
+  [Input]
+  5
+  2 3 1 2 2
+
+  [Output]
+  2
+   
+  [Code]
+
+  import sys
+  input = sys.stdin.readline
+
+  N = int(input())
+
+  values = []
+
+  n = list(map(int, input().split()))
+  n.sort(reverse=True) # 내림차순 정렬
+
+  # pop으로 빼오고 그걸 for문에 돌려서 가장 아래에 있는 수를 가져온다
+
+  while True:
+      pop_num = n[0]
+      values.append([])
+      values[-1].append(n.pop())
+      for i in range(pop_num - 1):
+          if len(n) == 0:
+              del values[-1]
+              break
+          values[-1].append(n.pop(0))
+      if len(n) == 0:
+          break
+
+  print(len(values))
+  
+* 문제에서 제시한 부분은 최대값이였으나, 최솟값으로 구했다. (수정 필요)
