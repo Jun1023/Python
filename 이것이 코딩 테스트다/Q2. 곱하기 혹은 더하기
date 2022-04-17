@@ -1,0 +1,34 @@
+Q. 
+  
+  그리디 문제이다.
+
+  [Input Condition]
+  1. 숫자로구성된 하나의 문자열 S가 주어집니다. ( 1 <= S의 길이 <= 20 )
+  
+  [Output Condition]
+  1. 첫째 줄에 만들어질 수 잇는 가장 큰 수를 출력합니다.
+    
+  [Input]
+  02984
+  576
+
+  [Output]
+  567
+  210
+   
+  [Code]
+
+  N = list(input())
+
+  result = 0
+
+  for i in range(len(N)):
+      if int(N[i]) < 2:
+          result += int(N[i])
+      else:
+          if result == 0:
+              result += int(N[i])
+          else:
+              result *= int(N[i])
+
+  print(result)
