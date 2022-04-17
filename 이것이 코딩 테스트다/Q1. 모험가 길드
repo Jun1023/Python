@@ -45,3 +45,28 @@ Q.
   print(len(values))
   
 * 문제에서 제시한 부분은 최대값이였으나, 최솟값으로 구했다. (수정 필요)
+
+import sys
+input = sys.stdin.readline
+
+N = int(input())
+
+values = []
+cnt = 0
+
+n = list(map(int, input().split()))
+n.sort() # 오름순 정렬
+
+for i in range(len(n)):
+    pop_num = n[0]
+    values.append(n[0:pop_num])
+    del n[0:pop_num]
+    if max(values[i]) == len(values[i]):
+        cnt += 1
+    else:
+        break
+
+
+print(cnt)
+
+# 최대값으로 작성한 코드
