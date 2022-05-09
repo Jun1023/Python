@@ -1,0 +1,28 @@
+Q.
+
+1. 문자를 오름 차순으로 정렬
+2. 숫자는 모두 더해서 오름 차순으로 정렬한 문자열 뒤에 붙이기
+
+ex)
+[input] K1KA5CB7
+[output] ABCKK13
+
+
+A.
+
+string = list(input())
+result = []
+sum_value = 0
+
+for i in range(len(string)):
+    if string[i].isdigit(): # 얘가 숫자다!
+        sum_value += int(string[i])
+    else:
+        result.append(string[i])
+
+result = sorted(result)
+
+if sum_value != 0:
+    result += str(sum_value)
+
+print(''.join(result))
