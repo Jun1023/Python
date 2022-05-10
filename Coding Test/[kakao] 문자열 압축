@@ -1,0 +1,33 @@
+Q.
+
+가능한 경우의 수를 완전 탐색하면 되는 문제이다.
+탐색해야 하는 범위는 문자열 길이의 //2 까지.
+일정 길이로 자른 문자열과 뒤에 겁사하는 값이 일치하는 경우 카운트
+만드렁지는 압축 문자열이 가장 짧은 것이 정답이다.
+
+A.
+
+def solution(s):
+    answer = len(s)
+
+    for step in range(1, (len(s) // 2) + 1):
+        com = ""
+        prev = s[0:step]
+        cnt = 1
+
+        for j in range(step, len(s), step):
+            if prev == s[j:j + step]: # 이전 상태와 동일하다면 카운트
+                cnt += 1
+
+            else:
+                com += str(cnt) + prev if cnt >= 2 else prev # 다른 문자열이 나왔따면
+                prev = s[j:j + step] # 상태 초기화
+                cnt = 1
+
+        com += str(cnt) + prev if cnt >= 2 else prev # 남아 있는 문자열 처리
+        answer = min(answer, len(com))
+    return answer
+    
+    
+# 책에 있는 코드를 참고하여 해결하였다.
+# 추후에 다른 방법으로도 해결해볼 생각이다.
