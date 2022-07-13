@@ -1,0 +1,45 @@
+Q.
+
+배열에서 target의 갯수를 구하기
+이진 탐색을 무조건 써야함
+upper_bound와 lower_bound를 쓰면 간단하게 해결
+
+
+A.
+
+import sys
+input = sys.stdin.readline
+
+N, x = map(int, input().split())
+arr = list(map(int, input().split()))
+
+# [target이 처음 나오는 부분:마지막에 나오는 부분 + 1]
+
+def lower_bound(nums, target):
+    left, right = 0, len(nums)
+
+    while left < right:
+        mid = left + (right - left) // 2
+
+        if nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid
+
+    return right
+
+def upper_bound(nums, target):
+
+    left, right = 0, len(nums)
+
+    while left < right:
+        mid = left + (right - left) // 2
+
+        if nums[mid] <= target:
+            left = mid + 1
+        else:
+            right = mid
+
+    return right
+
+print(upper_bound(arr, x) - lower_bound(arr, x))
